@@ -98,7 +98,7 @@ class TaskManager:
                 result: FundCrawlingResult = self._crawling_data_module.get_an_result()
                 if result:
                     self._save_result_module.save_result(result)
-                    self._cur_finished_task_count
+                    self._cur_finished_task_count+=1
                 
         self._all_task_finished = True
     def show_process(self):
