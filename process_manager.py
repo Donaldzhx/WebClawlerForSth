@@ -41,7 +41,7 @@ class FundCrawlingResult:
         THREE_YEARS_INCREASE = '近三年涨幅',
         FIVE_YEARS_INCREASE = '近五年涨幅'
     def __init__(self, fund_name: str, fund_code: str):
-        self.fund_into_dict = {FundCrawlingResult.Header.FUND_CODE: fund_code, 
+        self.fund_info_dict = {FundCrawlingResult.Header.FUND_CODE: fund_code, 
                                FundCrawlingResult.Header.FUND_SIMPLE_NAME: fund_name}
 class CrawlingDataModule(ABC):
     @abstractmethod
@@ -51,7 +51,7 @@ class CrawlingDataModule(ABC):
     def has_next_result(self) -> bool:
         return NotImplemented
     @abstractmethod
-    def get_an_result(self) -> Optional[FundCrawlingResult]:
+    def get_a_result(self) -> Optional[FundCrawlingResult]:
         return NotImplemented
     @abstractmethod
     def shutdown(self):
@@ -95,7 +95,7 @@ class TaskManager:
     def get_result_and_save(self):
         with self._save_data_module:
             while self._crawling_data_module.has_next_result():
-                result: FundCrawlingResult = self._crawling_data_module.get_an_result()
+                result: FundCrawlingResult = self._crawling_data_module.get_a_result()
                 if result:
                     self._save_result_module.save_result(result)
                     self._cur_finished_task_count+=1

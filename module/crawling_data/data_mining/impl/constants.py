@@ -1,0 +1,1 @@
+number_per_millie = r'-?(\d+?(,\d+)*?(\.\d+?)'
